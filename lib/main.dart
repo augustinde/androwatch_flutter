@@ -1,5 +1,5 @@
 import 'package:androwatch_flutter/provider/ow_hero_provider.dart';
-import 'package:androwatch_flutter/screen/homepage.dart';
+import 'package:androwatch_flutter/screen/ow_heros_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => OwHeroProvider(),
-      child: const MaterialApp(
-        home: HomePage(),
+      child: MaterialApp(
+        theme: ThemeData(
+          fontFamily: 'Overwatch',
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const OwHerosList(),
       ),
     );
   }
