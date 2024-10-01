@@ -2,14 +2,16 @@ import 'package:androwatch_flutter/provider/ow_hero_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OwHerosList extends StatefulWidget {
-  const OwHerosList({super.key});
+import 'ow_hero_details.dart';
+
+class OwHerosListScreen extends StatefulWidget {
+  const OwHerosListScreen({super.key});
 
   @override
-  State<OwHerosList> createState() => _OwHerosListState();
+  State<OwHerosListScreen> createState() => _OwHerosListState();
 }
 
-class _OwHerosListState extends State<OwHerosList> {
+class _OwHerosListState extends State<OwHerosListScreen> {
   @override
   void initState() {
     super.initState();
@@ -51,49 +53,58 @@ class _OwHerosListState extends State<OwHerosList> {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 children: heroes.map((hero) {
-                  return Card(
-                    color: const Color(0xFF218FFE),
-                    child: Row(
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF405275), // Set your desired background color here
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                            ), // Set your desired border radius here
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8), // Match the border radius
-                            child: Image.network(
-                              hero.portrait,
-                              width: 96,
-                              height: 96,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => OwHeroDetailsScreen(hero: hero),
                         ),
-                        const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              hero.name,
-                              style: const TextStyle(
-                                fontSize: 26,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
+                      );
+                    },
+                    child: Card(
+                      color: const Color(0xFF218FFE),
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF405275), // Set your desired background color here
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                bottomLeft: Radius.circular(8),
+                              ), // Set your desired border radius here
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8), // Match the border radius
+                              child: Image.network(
+                                hero.portrait,
+                                width: 96,
+                                height: 96,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            ImageIcon(
-                              color: Colors.white,
-                              AssetImage('assets/images/roles/${hero.role}.png'),
-                              size: 16,
-                            )
-                          ],
-                        ),
-                      ],
-                    )
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                hero.name,
+                                style: const TextStyle(
+                                  fontSize: 26,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              ImageIcon(
+                                color: Colors.white,
+                                AssetImage('assets/images/roles/${hero.role}.png'),
+                                size: 16,
+                              )
+                            ],
+                          ),
+                        ],
+                      )
+                    ),
                   );
                 }).toList(),
               ),

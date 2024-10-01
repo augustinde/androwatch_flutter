@@ -19,4 +19,15 @@ class OwHeroService{
       return [];
     }
   }
+
+  Future<OwHeroDetails> getHeroDetails(String key) async {
+    final response = await http.get(Uri.parse('${apiUrl}heroes/$key'));
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body) as Map<String, dynamic>;
+      return OwHeroDetails.fromJson(json);
+    } else {
+      throw Exception('Failed to load hero');
+    }
+  }
 }

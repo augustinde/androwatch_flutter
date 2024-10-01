@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Overwatch',
         ),
         debugShowCheckedModeBanner: false,
-        home: const OwHerosList(),
+        home: const OwHerosListScreen(),
       ),
     );
   }
